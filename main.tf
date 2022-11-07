@@ -15,15 +15,15 @@
 
 
 resource "fakewebservices_vpc" "primary_vpc" {
-  name       = "Primary VPC"
-  cidr_block = "0.0.0.0/1"
+  name       = var.name
+  cidr_block = var.cidr_block
 }
 
 resource "fakewebservices_server" "servers" {
   count = 2
 
   name = "Server ${count.index + 1}"
-  type = "t2.micro"
+  type = var.type
   vpc  = fakewebservices_vpc.primary_vpc.name
 }
 
